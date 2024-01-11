@@ -1,1 +1,1 @@
-# bank-app-vanilla-js
+Bank web application in vanilla javascript
