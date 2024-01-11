@@ -1,0 +1,33 @@
+@import 'src/styles/variables';
+
+.notification {
+  position: fixed;
+  top: 3rem;
+	left: 3rem;
+  z-index: 5;
+
+  border-radius: $radius;
+  background-color: rgb(255 74 74);
+  padding: 0.7rem 1.4rem;
+  display: none;
+  animation: fadeIn 1s;
+
+  &.error,
+	&.success {
+		display: block;
+	}
+
+	&.success {
+		background-color: #2e8677;
+	}
+}
+
+@keyframes fadeIn {
+  from {
+    left: -100%;
+  }
+
+  to {
+    left: 3rem;
+  }
+}
