@@ -1,4 +1,5 @@
 node_modules/
+bank-vanilla-server/
 .idea/
 dist
 
