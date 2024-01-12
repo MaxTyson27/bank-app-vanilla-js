@@ -2,6 +2,7 @@ node_modules/
 bank-vanilla-server/
 .idea/
 dist
+.env
 
 .DS_Store
 npm-debug.log

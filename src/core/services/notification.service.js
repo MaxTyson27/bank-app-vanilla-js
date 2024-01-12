@@ -1,4 +1,7 @@
 import { $R } from "../rQuery/rQuery.lib";
+
+import { NOTIFICATION_TYPES } from "@/constants/notification.const";
+
 import styles from "@/components/layout/notification/notification.module.scss";
 
 /**
@@ -28,7 +31,7 @@ class NotificationService {
    * @param {'success' | 'error'} type - The type of notification. Only 'success' or 'error' type.
    */
   show(type, msg) {
-    if (!['success', 'error'].includes(type)) {
+    if (![NOTIFICATION_TYPES.SUCCESS, NOTIFICATION_TYPES.ERROR].includes(type)) {
       throw new Error('Invalid notification type. Type must be "success" or "error"');
     }
 

@@ -1,6 +1,12 @@
 import { SERVER_URL } from "@/config/url.config";
 import { extractErrorMessage } from "./extract-error-message";
 
+import { StorageService } from "../services/storage.service";
+import notificationService from "../services/notification.service";
+
+import { ACCESS_TOKEN_KEY } from "@/constants/auth.const";
+import { NOTIFICATION_TYPES } from "@/constants/notification.const";
+
 /**
  * exios is a minimalistic library for handling API requests.
  * Fetch data from the API with provided options.
@@ -25,7 +31,7 @@ export const exios = async ({
   let error = null, data = null, isLoading = true;
   const url = `${SERVER_URL}/api${path}`;
   
-  const accessToken = '';
+  const accessToken = new StorageService().getItem(ACCESS_TOKEN_KEY);
 
   const requestOptions = {
     method,
@@ -56,14 +62,15 @@ export const exios = async ({
 
       onError?.(errorMessage);
 
-      // Notification 
+      notificationService.show(NOTIFICATION_TYPES.ERROR, errorMessage);
     }
 
   } catch (errorData) {
     const errorMessage = extractErrorMessage(errorData);
 
     if (errorMessage) {
-      onError(errorMessage);
+      onError?.(errorMessage);
+      notificationService.show(NOTIFICATION_TYPES.ERROR, errorMessage);
     }
   } finally {
     isLoading = false;
