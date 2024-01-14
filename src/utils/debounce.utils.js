@@ -1,7 +1,6 @@
 export const debounce = (func, ms) => {
   let timeout;
 
-  // eslint-disable-next-line
   return function (...args) {
     const later = () => {
       clearTimeout(timeout);
