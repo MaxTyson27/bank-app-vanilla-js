@@ -8,6 +8,7 @@ const NOTIFICATION_MESSAGES = {
   SUCCESS_LOGIN: 'You have successfully logged in',
   BALANCE_CHANGED: 'Balance successfully changed',
   TRANSFER_COMPLETE: 'Transfer successfully completed',
+  ERROR_TRANSFER: 'An inaccessible transfer amount was entered. Top up your balance',
 };
 
 export {

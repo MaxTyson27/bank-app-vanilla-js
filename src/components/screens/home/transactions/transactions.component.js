@@ -2,7 +2,7 @@ import { $R } from "@/core/rQuery/rQuery.lib";
 import { Store } from "@/core/store/store";
 
 import { TransactionService } from "@/api/transaction.service";
-import notificationService from "@/core/services/notification.service";
+// import notificationService from "@/core/services/notification.service";
 import renderService from "@/core/services/render.service";
 
 import { Heading } from "@/components/ui/heading/heading.component";
@@ -10,7 +10,7 @@ import { TransactionItem } from "./transaction-item/transaction-item.component";
 import { ChildComponent } from "@/core/component/child.component";
 
 import { TRANSACTION_COMPLETED } from "@/constants/event.const";
-import { NOTIFICATION_MESSAGES, NOTIFICATION_TYPES } from "@/constants/notification.const";
+// import { NOTIFICATION_MESSAGES, NOTIFICATION_TYPES } from "@/constants/notification.const";
 
 import template from './transactions.template.html';
 import styles from './transactions.module.scss';
@@ -56,7 +56,7 @@ export class Transactions extends ChildComponent {
 
   fetchData() {
     if (!this.state.user) {
-      notificationService.show(NOTIFICATION_TYPES.ERROR, NOTIFICATION_MESSAGES.NEED_AUTH);
+      // notificationService.show(NOTIFICATION_TYPES.ERROR, NOTIFICATION_MESSAGES.NEED_AUTH);
 
       return;
     }

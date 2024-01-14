@@ -13,6 +13,10 @@ import styles from './card-info.module.scss';
 import template from './card-info.template.html';
 import { BALANCE_UPDATED } from '@/constants/event.const';
 
+const LABELS = {
+	COPIED: 'Card number copied!'
+};
+
 const CODE = '*****';
 
 export class CardInfo extends ChildComponent {
@@ -44,7 +48,7 @@ export class CardInfo extends ChildComponent {
 
 	#copyCardNumber(e) {
 		navigator.clipboard.writeText(e.target.innerText).then(() => {
-			e.target.innerText = 'Card number copied!';
+			e.target.innerText = LABELS.COPIED;
 			setTimeout(() => {
 				e.target.innerText = formatCardNumber(this.card.number);
 			}, 2000);

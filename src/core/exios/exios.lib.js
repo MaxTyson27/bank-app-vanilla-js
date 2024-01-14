@@ -68,11 +68,8 @@ export const exios = async ({
   } catch (errorData) {
     const errorMessage = extractErrorMessage(errorData);
 
-    if (errorMessage) {
-      onError?.(errorMessage);
-
-      notificationService.show(NOTIFICATION_TYPES.ERROR, errorMessage);
-    }
+    onError?.(errorMessage);
+    notificationService.show(NOTIFICATION_TYPES.ERROR, errorMessage);
   } finally {
     isLoading = false;
   }

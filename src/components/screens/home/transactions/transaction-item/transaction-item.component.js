@@ -24,9 +24,9 @@ export class TransactionItem extends ChildComponent {
   render() {
     this.element = renderService.htmlToElement(template, [], styles);
 
-    $R(this.element).find('#transaction-name').text(this.type);
-    $R(this.element).find('#transaction-date').text(formatDate(this.date));
-    $R(this.element).find('#transaction-amount').text(formatToCurrency(this.amount));
+    $R(this.element).find('.transaction-name').text(this.type);
+    $R(this.element).find('.transaction-date').text(formatDate(this.date));
+    $R(this.element).find('.transaction-amount').text(formatToCurrency(this.amount));
     if (this.type.toLowerCase() === INCOME) {
       $R(this.element).addClass(styles.income);
     }

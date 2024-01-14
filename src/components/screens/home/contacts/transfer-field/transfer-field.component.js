@@ -4,7 +4,7 @@ import { $R } from "@/core/rQuery/rQuery.lib";
 import renderService from "@/core/services/render.service";
 import { CardService } from "@/api/card.service";
 import { ValidationService } from "@/core/services/validation.service";
-import notificationService from "@/core/services/notification.service";
+// import notificationService from "@/core/services/notification.service";
 
 import { ChildComponent } from "@/core/component/child.component";
 import { Button } from "@/components/ui/button/button.component";
@@ -13,10 +13,12 @@ import { Field } from "@/components/ui/field/field.component";
 import { VARIANTS } from "@/constants/variants.const";
 import { BALANCE_UPDATED, TRANSACTION_COMPLETED } from "@/constants/event.const";
 import { INPUT_FIELDS } from "@/constants/input-types.const";
-import { NOTIFICATION_MESSAGES, NOTIFICATION_TYPES } from "@/constants/notification.const";
+// import { NOTIFICATION_MESSAGES, NOTIFICATION_TYPES } from "@/constants/notification.const";
 
 import template from './transfer-field.template.html';
 import styles from './transfer-field.module.scss';
+import notificationService from "@/core/services/notification.service";
+import { NOTIFICATION_MESSAGES, NOTIFICATION_TYPES } from "@/constants/notification.const";
 
 const LABELS = {
   SENDING: 'Sending...',
@@ -38,7 +40,9 @@ export class TransferField extends ChildComponent {
     event.preventDefault();
     
     if (!this.state.user) {
-      notificationService.show(NOTIFICATION_TYPES.ERROR, NOTIFICATION_MESSAGES.NEED_AUTH);
+      // notificationService.show(NOTIFICATION_TYPES.ERROR, NOTIFICATION_MESSAGES.NEED_AUTH);
+
+      return;
     }
 
     $R(event.target).text(LABELS.SENDING).attr('disabled', true);
@@ -62,6 +66,13 @@ export class TransferField extends ChildComponent {
     let amount = prompt(LABELS.PROMT_TEXT);
 
     if (!amount) {
+      reset();
+
+      return;
+    }
+
+    if (parseFloat(amount) > this.state.user.card.balance) {
+      notificationService.show(NOTIFICATION_TYPES.ERROR, NOTIFICATION_MESSAGES.ERROR_TRANSFER);
       reset();
 
       return;
