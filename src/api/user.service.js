@@ -12,7 +12,7 @@ export class UserService {
     const term = searchTerm ? new URLSearchParams({searchTerm}) : '';
 
     const data = {
-      path: `${ROUTE_TYPES.USERS}${term}`,
+      path: `${ROUTE_TYPES.USERS}/?${term}`,
       onSuccess,
     };
 

@@ -25,8 +25,6 @@ class NotificationService {
 
   /**
    * Show a notification with specified message and type.
-   * @date 10.01.2024 - 19:51:47
-   *
    * @param {string} msg - Text content which will be show in notification.
    * @param {'success' | 'error'} type - The type of notification. Only 'success' or 'error' type.
    */

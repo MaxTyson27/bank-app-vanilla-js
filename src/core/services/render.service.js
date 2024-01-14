@@ -3,18 +3,15 @@ import { ChildComponent } from "../component/child.component";
 class RenderService {
   /**
    * htmlToElement method
-   * @date 06.01.2024 - 14:04:24
-   *
    * @param {string} html
    * @param {Array} [components=[]]
    * @param {Object} [styles]
    * @returns {HTMLElement}
    */
   htmlToElement(html, components = [], styles) {
-    const template = document.createElement('template');
-    template.innerHTML = html;
-
-    const element = template.content.firstChild;
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const element = doc.body.firstChild;
 
     this.#applyModuleStyles(styles, element);
     this.#replaceComponentTags(element, components);
@@ -24,7 +21,6 @@ class RenderService {
 
   /**
    * applyModuleStyles method
-   * @date 06.01.2024 - 14:43:45
    * @param {Object} moduleStyles
    * @param {string} element
    * @returns {void}
@@ -49,8 +45,6 @@ class RenderService {
 
   /**
    * replaceComponentTags method
-   * @date 06.01.2024 - 14:17:50
-   *
    * @param {HTMLElement} parentElement
    * @param {Array} components
    * @returns {void}

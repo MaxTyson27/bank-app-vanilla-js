@@ -1,20 +1,20 @@
 const ROUTE_TYPES = {
   AUTH: {
-    AUTH: '/auth',
+    AUTH: 'auth',
     LOGIN: 'login',
     REGISTER: 'register'
   },
   CARDS: {
-    CARDS: '/cards',
+    CARDS: 'cards',
     GET_BY_USER: 'by-user',
     BALANCE: 'balance',
     TOP_UP: 'top-up',
     WITHDRAWAL: 'withdrawal',
     TRANSFER: 'transfer-money',
   },
-  STATISTICS: '/statistics',
-  TRANSACTIONS: '/transactions',
-  USERS: '/users'
+  STATISTICS: 'statistics',
+  TRANSACTIONS: 'transactions',
+  USERS: 'users'
 };
 
 export {

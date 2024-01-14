@@ -1,17 +1,14 @@
+import { $R } from "@/core/rQuery/rQuery.lib";
 import { ChildComponent } from "@/core/component/child.component";
+
 import renderService from "@/core/services/render.service";
 
 import template from './loader.template.html';
 import styles from './loader.module.scss';
-import { $R } from "@/core/rQuery/rQuery.lib";
-
-export const LOADER_SELECTOR = '[data-component="loader"]';
 
 export class Loader extends ChildComponent {
   /**
    * Creates an instance of Loader.
-   * @date 08.01.2024 - 22:03:00
-   *
    * @constructor
    * @param {number} [width=100]
    * @param {number} [height=100]

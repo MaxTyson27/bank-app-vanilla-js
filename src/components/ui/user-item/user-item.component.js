@@ -10,8 +10,6 @@ import styles from './user-item.module.scss';
 export class UserItem extends ChildComponent {
   /**
    * Creates an instance of UserItem.
-   * @date 09.01.2024 - 08:56:17
-   *
    * @constructor
    * @param {{avatarPath: string, name: string}} user - Full props about user.
    * @param {function(Event): void} [onClick] - The optional callback func, will be call after "click" event.
@@ -45,7 +43,7 @@ export class UserItem extends ChildComponent {
 
     this.update(this.user);
 
-    $R(this.element).click(this.onClick || this.#preventDefault.bind(this));
+    $R(this.element).click(this.onClick || this.#preventDefault);
     if (!this.onClick) $R(this.element).attr('disabled', '');
     if (this.isGray) $R(this.element).addClass(styles.gray);
 

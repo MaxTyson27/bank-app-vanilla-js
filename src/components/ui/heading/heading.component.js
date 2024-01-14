@@ -8,8 +8,6 @@ import { $R } from "@/core/rQuery/rQuery.lib";
 export class Heading extends ChildComponent {
   /**
    * Creates an instance of Heading.
-   * @date 08.01.2024 - 19:08:38
-   *
    * @constructor
    * @param {string | HTMLElement} text - Content in Heading component
    */

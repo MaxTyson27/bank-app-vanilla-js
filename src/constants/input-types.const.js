@@ -3,4 +3,11 @@ const INPUT_TYPES = {
   TEXT: 'text',
 };
 
-export { INPUT_TYPES };
+const INPUT_FIELDS = {
+  EMAIL: 'email',
+  PASSWORD: 'password',
+  AMOUNT: 'amount',
+  CARD_NUMBER: 'card-number',
+};
+
+export { INPUT_TYPES, INPUT_FIELDS };

@@ -13,10 +13,8 @@ import { INPUT_TYPES } from "@/constants/input-types.const";
 export class Field extends ChildComponent {
   /**
    * Creates an instance of Field.
-   * @date 07.01.2024 - 19:57:26
-   *
    * @constructor
-   * @param {{ placeholder?: string; type?: string; value?: string; name: string; variant: any; onInput: function(value): void}} props
+   * @param {{ placeholder?: string; type?: string; value?: string; name: string; variant: 'credit-card'; onInput: function(value): void}} props
    * @param {string} [props.placeholder=''] - input's placeholder
    * @param {string} [props.type='text'] - input's type
    * @param {string} [props.value=''] - input's value

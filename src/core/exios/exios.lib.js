@@ -29,7 +29,7 @@ export const exios = async ({
   onError = null,
 }) => {
   let error = null, data = null, isLoading = true;
-  const url = `${SERVER_URL}/api${path}`;
+  const url = `${SERVER_URL}/api/${path}`;
   
   const accessToken = new StorageService().getItem(ACCESS_TOKEN_KEY);
 
@@ -70,6 +70,7 @@ export const exios = async ({
 
     if (errorMessage) {
       onError?.(errorMessage);
+
       notificationService.show(NOTIFICATION_TYPES.ERROR, errorMessage);
     }
   } finally {

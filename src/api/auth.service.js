@@ -1,17 +1,15 @@
 import { exios } from "@/core/exios/exios.lib";
 
+import { Store } from "@/core/store/store";
+
 import notificationService from "@/core/services/notification.service";
 
-import { NOTIFICATION_TYPES } from "@/constants/notification.const";
+import { NOTIFICATION_MESSAGES, NOTIFICATION_TYPES } from "@/constants/notification.const";
 import { ROUTE_TYPES } from "@/constants/api-routes.const";
-
-const LABELS = {
-  SUCCESS_LOGIN: 'You have successfully logged in',
-};
 
 export class AuthService {
   constructor() {
-    //store
+    this.store = Store.getInstance();
   }
 
   /**
@@ -23,10 +21,11 @@ export class AuthService {
    */
   main(type, body) {
     const exiosOptions = {
-      path: `${ROUTE_TYPES.AUTH}/${type}`,
+      path: `${ROUTE_TYPES.AUTH.AUTH}/${type}`,
       body,
-      onSuccess: () => {
-        notificationService.show(NOTIFICATION_TYPES.SUCCESS, LABELS.SUCCESS_LOGIN);
+      onSuccess: data => {
+        this.store.login(data.user, data.accessToken);
+        notificationService.show(NOTIFICATION_TYPES.SUCCESS, NOTIFICATION_MESSAGES.SUCCESS_LOGIN);
       },
       method: 'POST'
     };

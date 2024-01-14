@@ -4,15 +4,19 @@ import renderService from "@/core/services/render.service";
 import template from './logout-button.template.html';
 import styles from './logout-button.module.scss';
 import { $R } from "@/core/rQuery/rQuery.lib";
+import { Store } from "@/core/store/store";
 
 export class LogoutButton extends ChildComponent {
   constructor({router}) {
     super();
 
+    this.store = Store.getInstance();
+    this.user = this.store.state.user;
     this.router = router;
   }
 
   #handleClickButton() {
+    this.store.logout();
     this.router.navigate('/auth');
   }
 

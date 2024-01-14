@@ -14,10 +14,8 @@ export class Button extends ChildComponent {
   #isRightVariant;
   /**
    * Creates an instance of Button.
-   * @date 07.01.2024 - 19:28:10
-   *
    * @constructor
-   * @param {{ children: number | string | HTMLElement; onClick: function(): void; variant?: 'green' | 'purple'; }} props
+   * @param {{ children: number | string | HTMLElement; onClick: function(Event): void; variant?: 'green' | 'purple'; }} props
    * @param {*} props.children - Children will be paste in content piece tag of button.
    * @param {*} props.onClick - Callback function on click event listener.
    * @param {*} [props.variant] - Variants of button style.

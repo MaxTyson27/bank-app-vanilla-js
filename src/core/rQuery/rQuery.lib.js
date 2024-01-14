@@ -4,16 +4,12 @@ import { formatCardNumberWithDashes } from "@/utils/format/format-card-number";
 
 /**
  * Represents the RQuery class for working with DOM-elements.
- * @date 06.01.2024 - 15:51:54
- *
  * @class RQuery
  * @typedef {RQuery}
  */
 class RQuery {
   /**
    * Creates an instance of RQuery.
-   * @date 06.01.2024 - 15:57:57
-   *
    * @constructor
    * @param {string | HTMLElement} selector
    */
@@ -24,7 +20,7 @@ class RQuery {
       if (!this.element) {
         throw new Error(`Element ${selector} not found!`);
       }
-    } else if (selector instanceof HTMLElement) {
+    } else if (selector instanceof HTMLElement || SVGElement) {
       this.element = selector;
     } else {
       throw new Error('Invalid selector type.');
@@ -33,8 +29,6 @@ class RQuery {
 
   /**
    * Check current element tag name.
-   * @date 08.01.2024 - 18:36:47
-   *
    * @param {string} tagName - The tag name for checking.
    * @returns {boolean} - Boolean result checking.
    */
@@ -44,7 +38,6 @@ class RQuery {
 
   /**
    * Set attributes and event listeners for an input element.
-   * @date 07.01.2024 - 20:01:34
    * @param {Object} options - An object containing input options.
    * @param {function(Event): void} [options.onInput] - The event listener for the input's input event.
    * @param {object} [options.rest] - Optional attributes to set on the input element.
@@ -71,8 +64,6 @@ class RQuery {
 
   /**
    * Set attributes and event listeners for a number input element.
-   * @date 08.01.2024 - 18:26:21
-   *
    * @param {number} limit - Max length of input value.
    * @param {function(value): void} [onInput] - The event listener for the input's input event.
    * @returns {RQuery} - The current RQuery instance.
@@ -98,7 +89,6 @@ class RQuery {
 
   /**
    * Set attributes and event listeners for a number input element.
-   * @date 08.01.2024 - 18:26:21
    * @param {function(value): void} [onInput] - The event listener for the input's input event.
    * @returns {RQuery} - The current RQuery instance.
    */
@@ -124,8 +114,6 @@ class RQuery {
 
   /**
    * Find the first element that matches the specified selector within the selected element.
-   * @date 06.01.2024 - 16:05:54
-   *
    * @param {string | HTMLElement} selector - A CSS selector string or an Element
    * @returns {RQuery} - A new RQuery instance fot the given selector.
    */
@@ -138,9 +126,20 @@ class RQuery {
   }
 
   /**
+   * Find the all element that matches the specified selector within the selected element.
+   * @param {string | HTMLElement} selector - A CSS selector string or an Element
+   * @returns {Array<RQuery>} A new Array with all elements fot the given selector.
+   */
+  findAll(selector) {
+    const elements = this.element.querySelectorAll(selector);
+
+    if (!elements || !elements.length) throw new Error(`Element ${selector} not found!`);
+
+    return [...elements].map(elem => new RQuery(elem));
+  }
+
+  /**
    * Append a new element as a child of the selection element.
-   * @date 06.01.2024 - 19:42:52
-   *
    * @param {string | HTMLElement} childElement
    * @returns {RQuery}
    */
@@ -152,8 +151,6 @@ class RQuery {
 
   /**
    * Insert a new element before the selection element.
-   * @date 06.01.2024 - 19:42:52
-   *
    * @param {string | HTMLElement} newElement
    * @returns {RQuery}
    */
@@ -175,8 +172,6 @@ class RQuery {
 
   /**
    * Get or set inner HTML of the selected element.
-   * @date 06.01.2024 - 22:24:11
-   *
    * @param {string} [htmlContent] - Optional content to set. If not provided, the current inner HTML will be returned.
    * @returns {RQuery | string} - The current RQuery instance for chaining when setting HTML content, or the current inner HTML when getting.
    */
@@ -192,8 +187,6 @@ class RQuery {
 
   /**
    * Get or set text content of the selected element.
-   * @date 06.01.2024 - 22:24:11
-   *
    * @param {string} [textContent] - Optional content to set. If not provided, the current text content will be returned.
    * @returns {RQuery | string} - The current RQuery instance for chaining when setting text content, or the current text content when getting.
    */
@@ -207,10 +200,8 @@ class RQuery {
 
   /**
    * Attach a click event listener to the selected element.
-   * @date 07.01.2024 - 18:44:45
-   *
    * @param {function(Event): void} callback - The event listener function to execute when the selected element is clicked. The function will receive the event object as its atgument.
-   * @returns {RQuery} - The current Rquery instance
+   * @returns {RQuery} - The current Rquery instance.
    */
   click(callback) {
     this.element.addEventListener('click', callback);
@@ -219,9 +210,25 @@ class RQuery {
   }
 
   /**
+   * @returns {RQuery} - The current Rquery instance.
+   */
+  show() {
+    this.element.style.removeProperty('display');
+
+    return this;
+  }
+
+  /**
+   * @returns {RQuery} - The current Rquery instance.
+   */
+  hide() {
+    this.element.style.display = 'none';
+
+    return this;
+  }
+
+  /**
    * Change css from element
-   * @date 06.01.2024 - 16:13:50
-   *
    * @param {string} property
    * @param {string} value
    * @returns {this}
@@ -238,7 +245,6 @@ class RQuery {
 
   /**
    * Add the class or a list classes to the current element.
-   * @date 07.01.2024 - 18:49:01
    * @param {string | string[]} classNames - A single class name or an array of class names to add to the element.
    * @returns {RQuery} - The current RQuery instance
    */
@@ -256,7 +262,6 @@ class RQuery {
 
   /**
    * Remove the class or a list classes to the current element.
-   * @date 07.01.2024 - 18:49:01
    * @param {string | string[]} classNames - A single class name or an array of class names to add to the element.
    * @returns {RQuery} - The current RQuery instance
    */
@@ -274,8 +279,6 @@ class RQuery {
 
   /**
    * Set or get a value of an attr on the selected element.
-   * @date 09.01.2024 - 08:48:51
-   *
    * @param {string} attrName - The name of the attr to set. 
    * @param {string} [value] - The value to set for the attr. If not provided, current value of the attr will be returned.
    * @returns {RQuery | string} The current RQuery instance (if setting) or attr value (if getting).
@@ -293,12 +296,74 @@ class RQuery {
       return this;
     }
   }
+
+  /**
+   * Removes an attr from the current element.
+   * @param {string} attrName - The attr's name, will be removed.
+   * @returns {RQuery} - A new RQuery instance fot the given selector.
+   */
+  removeAttr(attrName) {
+    if (typeof attrName !== 'string') {
+      throw new Error('Attr name must be a string!');
+    }
+
+    this.element.removeAttribute(attrName);
+
+    return this;
+  }
+
+ /**
+	 * Gets or sets the value of an input element.
+	 * @param {string} [newValue] - The new value to set for the input element. If not provided, the method returns the current value.
+	 * @return {string|RQuery} - If newValue is provided, returns the RQuery instance. Otherwise, returns the current value of the input element.
+	 */
+ value(newValue) {
+  if (typeof newValue === 'undefined') {
+    return this.element.value;
+  } else {
+    this.element.value = newValue;
+
+    return this;
+  }
+}
+
+  /**
+   * Set an event listener for the submit event of a form element.
+   * @param {function(Event): void} onSubmit - The event listener for the form's submit event.
+   * @returns {RQuery} - A new RQuery instance fot the given selector.
+   */
+  submit(onSubmit) {
+    if (!this.#isTagName('form')) throw new Error('Element must be a form');
+
+    this.element.addEventListener('submit', event => {
+      event.preventDefault();
+      onSubmit(event);
+    });
+
+    return this;
+  }
+
+  /**
+	 * Add an event listener to the selected element for the specified event type.
+	 * @param {string} eventType - The type of event to listen for (e.g., 'click', 'input', etc.).
+	 * @param {function(Event): void} callback - The event listener function to execute when the event is triggered. The function will receive the event object as its argument.
+	 * @returns {RQuery} The current RQuery instance for chaining.
+	 */
+	on(eventType, callback) {
+		if (typeof eventType !== 'string' || typeof callback !== 'function') {
+			throw new Error(
+				'eventType must be a string and callback must be a function'
+			);
+		}
+
+		this.element.addEventListener(eventType, callback);
+
+		return this;
+	}
 }
 
 /**
  * Create a new RQuery instance fot the given selector.
- * @date 06.01.2024 - 16:02:26
- *
  * @export
  * @param {string | HTMLElement} selector - A CSS selector string or an Element
  * @returns {RQuery} - A new RQuery instance fot the given selector.
