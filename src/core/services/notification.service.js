@@ -40,8 +40,6 @@ class NotificationService {
       error: styles.error,
     };
 
-    console.log($R('#notification'));
-
     const notificationElem = $R('#notification');
 
     notificationElem.text(msg).addClass(classNames[type]);
