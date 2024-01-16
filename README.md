@@ -1,3 +1,5 @@
-Bank web application in vanilla javascript
+## Bank web application in vanilla javascript
 
-Это SPA приложение со своим ядром, роутингом, мини-библиотеками для работы с запросами (exios) и для упрощения разработки (rQquery), со своими HTML-шаблонами (компонентами). При разработке использовался только классовый подход на ванильном js. Никаких дополнительных библиотек не устанавливалось.
+This is a Single Page Applicatuin with its core, routing, 
+Это SPA приложение со своим ядром, роутингом, mini-libraries for work with requests (exios) and to simplify development (rQquery), HTML templates (components).
+During development, only a class approach was used in vanilla js. No additional libraries were installed.
